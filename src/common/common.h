@@ -3,12 +3,12 @@
 #define __COMMON_H
 
 
-class common {
+class Common {
 
 public:
 
-    common() {}
-    ~common() {}
+    Common() {}
+    ~Common() {}
 
     int talk(void);
     int add(int a, int b);

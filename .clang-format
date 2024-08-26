@@ -1,0 +1,9 @@
+BasedOnStyle: Google
+IndentWidth: 4               # Number of spaces for each indentation level
+TabWidth: 4                  # Number of spaces per tab
+UseTab: Never                # Use spaces instead of tabs
+ColumnLimit: 100             # Maximum line length
+BreakBeforeBraces: Allman    # Opening braces on a new line
+AllowShortFunctionsOnASingleLine: Empty  # Allow only empty functions on a single line
+PointerAlignment: Left       # Align pointer symbols to the left
+SpacesBeforeTrailingComments: 2  # Spaces before trailing comments
