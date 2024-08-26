@@ -24,6 +24,25 @@ docker-compose up -d
 docker exec -it cxx-template bash
 ```
 
+### b) Code quality tools
+
+CMake has built-in features to connect with code quality tools and analyze the code that is being compiled.
+In the current version of this repo, the following tools has been configured:
+
+* cpplint
+* clang-tidy
+* clang-format
+* iwyu
+
+Those tools are triggered from CMake in the following lines on the general CMakeLists.txt
+
+```cmake
+set(CMAKE_CXX_CPPLINT "cpplint")
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+set(CMAKE_CXX_CLANG_FORMAT "clang-format")
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
+```
+
 ## Test suite
 
 Unit test are based on Catch2 and FakeIt. These libs are added as submodules. Be sure to clone the repository using
