@@ -5,20 +5,17 @@
  */
 
 #include <common.h>
-
-#include <cassert>
 #include <iostream>
-using namespace std;
 
 /**
  *   @fn main
  *   @brief main program
  */
 
-int main(void) {
-  common c;
+int main() {
+  Common c;
 
-  cout << "Hello C++ Template!" << endl;
+  std::cout << "Hello C++ Template!" << std::endl;
 
   c.talk();
 
