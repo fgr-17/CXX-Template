@@ -1,6 +1,6 @@
 # C++ Repository Template
 
-**Author:** 
+**Author:**
 
 # Repo information:
 
@@ -24,46 +24,28 @@ docker-compose up -d
 docker exec -it cxx-template bash
 ```
 
-### b) Build and deploy inside VSC devcontainer:
+### b) Code quality tools
 
-The easiest way to set up the container is using the VSC Docker Extension as a [devcontainer](https://code.visualstudio.com/docs/remote/containers).
+CMake has built-in features to connect with code quality tools and analyze the code that is being compiled.
+In the current version of this repo, the following tools has been configured:
 
-- Install Visual Studio Code ([VSC](https://code.visualstudio.com/))
+* cpplint
+* clang-tidy
+* clang-format
+* iwyu
 
-- Install [Docker](https://www.docker.com/) 
+Those tools are triggered from CMake in the following lines on the general CMakeLists.txt
 
-- Install the following VSC extensions:
-
-    -  Name: Docker
-
-        Id: ms-azuretools.vscode-docker
-
-        Description: Makes it easy to create, manage, and debug containerized applications.
-
-        Version: 1.18.0
-
-        Publisher: Microsoft
-
-        [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-
-
-    - Name: Remote - Containers
-
-        Id: ms-vscode-remote.remote-containers
-
-        Description: Open any folder or repository inside a Docker container and take advantage of Visual Studio Code's full feature set.
-        
-        Version: 0.209.6
-        
-        Publisher: Microsoft
-        
-        [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-
-- Usage: Open the current repository using the Dev Container VSC extension, chosing "Open Folder inside container" . The first time, it may take several minutes to build the container.
+```cmake
+set(CMAKE_CXX_CPPLINT "cpplint")
+set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
+set(CMAKE_CXX_CLANG_FORMAT "clang-format")
+set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
+```
 
 ## Test suite
 
-Unit test are based on Catch2 and FakeIt. These libs are added as submodules. Be sure to clone the repository using 
+Unit test are based on Catch2 and FakeIt. These libs are added as submodules. Be sure to clone the repository using
 
 ```git
 git clone <URL> --recursive
