@@ -1,18 +1,41 @@
-set(TEST_NAME test_suite)
+cmake_minimum_required(VERSION 3.18)
 
-set(LIB_DIR lib)
-set(FAKEIT_DIR FakeIt)
-
-include_directories(
-  ${CMAKE_SOURCE_DIR}/${LIB_DIR}/${FAKEIT_DIR}
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.14.0
 )
-  
-set(Sources 
-  main_test.cpp
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+foreach(target IN ITEMS gtest gtest_main gmock gmock_main)
+    if(TARGET ${target})
+        set_target_properties(${target} PROPERTIES 
+        CXX_CLANG_TIDY ""
+        CXX_INCLUDE_WHAT_YOU_USE "")
+    endif()
+endforeach()
+
+enable_testing()
+
+add_executable(test_runner main_test.cpp)
+
+target_link_libraries(test_runner 
+    PRIVATE 
+    common
+    GTest::gtest
+    GTest::gtest_main
 )
 
-## Testing 
-find_package(Catch2 3 REQUIRED)
+target_include_directories(test_runner PRIVATE 
+    ${CMAKE_SOURCE_DIR}/src/common
+)
 
-add_executable(${TEST_NAME} ${Sources})
-target_link_libraries(${TEST_NAME} PRIVATE Catch2::Catch2WithMain)
+set_target_properties(test_runner PROPERTIES
+    CXX_CLANG_TIDY ""
+    CXX_INCLUDE_WHAT_YOU_USE ""
+)
+
+# Add test to CTest
+add_test(NAME CXX_Template_Tests COMMAND test_runner)
