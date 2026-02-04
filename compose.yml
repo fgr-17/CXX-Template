@@ -1,7 +1,7 @@
 services:
   cxx-template:
     build: .
-    container_name: cxx-template2
+    container_name: cxx-template
     volumes:
       - .:/workspace
     stdin_open: true
