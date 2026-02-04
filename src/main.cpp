@@ -5,6 +5,7 @@
  */
 
 #include <common.h>
+
 #include <iostream>
 
 /**
@@ -13,11 +14,11 @@
  */
 
 int main() {
-  Common c;
+    Common c;
 
-  std::cout << "Hello C++ Template!" << std::endl;
+    std::cout << "Hello C++ Template!" << std::endl;
 
-  c.talk();
+    c.talk();
 
-  return 0;
+    return 0;
 }

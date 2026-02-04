@@ -16,3 +16,5 @@ RUN apt install -y iwyu
 
 RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
 RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc
+
+WORKDIR /workspace

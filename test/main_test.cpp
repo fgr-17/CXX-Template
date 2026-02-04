@@ -1,9 +1,37 @@
-#include <catch2/catch_test_macros.hpp>
-#include <fakeit.hpp>
+/**
+ * @file main_test.cpp
+ * @brief Test file for CXX Template project
+ * @author rouxfederico@gmail.com
+ */
 
-TEST_CASE("dummy test", "[C++ Template]") {
-  int i = 0;
+#include <common.h>
+#include <gtest/gtest.h>  // NOLINT
 
-  INFO("Basic info from test app: " << i);
-  REQUIRE(true);
+/**
+ * @brief Test case for Common::add function
+ */
+TEST(CommonTest, AddTest) {
+    Common c;
+    EXPECT_EQ(c.add(2, 3), 5);
+    EXPECT_EQ(c.add(0, 0), 0);
+    EXPECT_EQ(c.add(-1, 1), 0);
+    EXPECT_EQ(c.add(10, -5), 5);
+}
+
+/**
+ * @brief Test case for Common::talk function
+ */
+TEST(CommonTest, TalkTest) {
+    Common c;
+    // talk() returns 0 on success
+    EXPECT_EQ(c.talk(), 0);
+}
+
+/**
+ * @brief Test case for Common object creation
+ */
+TEST(CommonTest, ConstructorTest) {
+    Common c;
+    // Object should be created successfully
+    SUCCEED();
 }

@@ -15,11 +15,15 @@ set(CMAKE_CXX_CLANG_FORMAT "clang-format")
 set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 
 set(SRC_DIR src)
+set(TEST_DIR test)
 
 file(GLOB_RECURSE ALL_SOURCE_FILES 
     ${CMAKE_SOURCE_DIR}/${SRC_DIR}/*.cpp 
     ${CMAKE_SOURCE_DIR}/${SRC_DIR}/*.c
     ${CMAKE_SOURCE_DIR}/${SRC_DIR}/*.h
+    ${CMAKE_SOURCE_DIR}/${TEST_DIR}/*.cpp
+    ${CMAKE_SOURCE_DIR}/${TEST_DIR}/*.c
+    ${CMAKE_SOURCE_DIR}/${TEST_DIR}/*.h
 )
 
 add_custom_target(fix
@@ -29,3 +33,13 @@ add_custom_target(fix
 
 add_subdirectory(src)
 add_subdirectory(test)
+
+add_custom_target(test
+    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Running tests..."
+    DEPENDS test_runner
+)
+
+add_dependencies(test_runner fix)
+add_dependencies(test test_runner)
