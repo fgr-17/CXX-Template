@@ -17,8 +17,6 @@ foreach(target IN ITEMS gtest gtest_main gmock gmock_main)
     endif()
 endforeach()
 
-enable_testing()
-
 add_executable(test_runner main_test.cpp)
 
 target_link_libraries(test_runner 
@@ -37,5 +35,4 @@ set_target_properties(test_runner PROPERTIES
     CXX_INCLUDE_WHAT_YOU_USE ""
 )
 
-# Add test to CTest
-add_test(NAME CXX_Template_Tests COMMAND test_runner)
+add_test(NAME CXX_Template_Tests COMMAND $<TARGET_FILE:test_runner>)

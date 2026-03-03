@@ -23,7 +23,6 @@ TEST(CommonTest, AddTest) {
  */
 TEST(CommonTest, TalkTest) {
     Common c;
-    // talk() returns 0 on success
     EXPECT_EQ(c.talk(), 0);
 }
 
@@ -32,6 +31,5 @@ TEST(CommonTest, TalkTest) {
  */
 TEST(CommonTest, ConstructorTest) {
     Common c;
-    // Object should be created successfully
     SUCCEED();
 }

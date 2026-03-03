@@ -31,15 +31,10 @@ add_custom_target(fix
     COMMENT "Running clang-format to fix formatting..."
 )
 
+# Enable testing (must be called before add_subdirectory for test)
+enable_testing()
+
 add_subdirectory(src)
 add_subdirectory(test)
 
-add_custom_target(test
-    COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Running tests..."
-    DEPENDS test_runner
-)
-
 add_dependencies(test_runner fix)
-add_dependencies(test test_runner)
