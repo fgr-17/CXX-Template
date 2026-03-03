@@ -29,58 +29,40 @@ docker exec -it cxx-template bash
 CMake has built-in features to connect with code quality tools and analyze the code that is being compiled.
 In the current version of this repo, the following tools has been configured:
 
-* cpplint
 * clang-tidy
 * clang-format
 * iwyu
 
 Those tools are triggered from CMake in the following lines on the general CMakeLists.txt
 
-```cmake
-set(CMAKE_CXX_CPPLINT "cpplint")
+~~~CMake
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 set(CMAKE_CXX_CLANG_FORMAT "clang-format")
 set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
-```
+~~~
+
+If you run into clang-tidy issues, there's a `make fix` target that can do the work for you
 
 ## Test suite
 
-Unit test are based on Catch2 and FakeIt. These libs are added as submodules. Be sure to clone the repository using
+Unit test are based on gtest and gmock. To run tests, jump into the container and run:
 
-```git
-git clone <URL> --recursive
-```
-
-Or once the repository was cloned, then run:
-
-```git
-git submodule update --init
-```
-
-Catch2 needs to be installed on the container. This can be easily done by executing:
-
-```bash
-cd scripts
-./install-catch2.sh
-```
+~~~bash
+cd build
+cmake ..
+make test
+~~~
 
 ## Building the sources:
 
-This project is based on cmake. In order to simplify the process, a script called <build-all.sh> is provided. It's a bash script, so it can be run inside the container, or on a Unix-macOS environment. This script will generate all the building files and the docs (based on doxygen). Just run:
+This project is based on CMake. To compile everything 
 
-```bash
-cd scripts
-./build-all.sh
-```
-
-To compile natively on Windows, please open a cmd.exe or PowerShell terminal, cd into the project folder and run:
-
-```
+~~~bash
 mkdir -p build
 cd build
-cmake ..\
-
-```
+cmake ..
+make
+~~~
 
 The executable files can be found at:
 
