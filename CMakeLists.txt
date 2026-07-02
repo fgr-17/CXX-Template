@@ -9,6 +9,11 @@ set(CMAKE_CXX_EXTENSIONS OFF CACHE BOOL "enable/disable compiler specific extens
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -W -Wall -Wextra -Werror")
 
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Debug" CACHE STRING "Build type" FORCE)
+endif()
+
+include(${CMAKE_SOURCE_DIR}/cmake/Valgrind.cmake)
 
 set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
 set(CMAKE_CXX_CLANG_FORMAT "clang-format")
@@ -38,3 +43,13 @@ add_subdirectory(src)
 add_subdirectory(test)
 
 add_dependencies(test_runner fix)
+
+if(VALGRIND_EXECUTABLE)
+    add_valgrind_check(test_runner)
+
+    add_custom_target(valgrind
+        COMMAND ${CMAKE_CTEST_COMMAND} -L valgrind --output-on-failure
+        DEPENDS test_runner cxx_app
+        COMMENT "Running Valgrind memory checks via CTest"
+    )
+endif()

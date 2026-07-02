@@ -32,6 +32,7 @@ In the current version of this repo, the following tools has been configured:
 * clang-tidy
 * clang-format
 * iwyu
+* valgrind (memory checks, container only)
 
 Those tools are triggered from CMake in the following lines on the general CMakeLists.txt
 
@@ -42,6 +43,25 @@ set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE "iwyu")
 ~~~
 
 If you run into clang-tidy issues, there's a `make fix` target that can do the work for you
+
+### Valgrind
+
+Valgrind is installed in the Docker image only (not required on the host). After building inside the container, run memory checks with:
+
+~~~bash
+cd build
+cmake ..
+make
+make valgrind
+~~~
+
+Or run only the Valgrind CTest entries:
+
+~~~bash
+ctest -L valgrind --output-on-failure
+~~~
+
+Build with debug symbols (the default `CMAKE_BUILD_TYPE=Debug`) for useful Valgrind stack traces.
 
 ## Test suite
 
@@ -67,4 +87,4 @@ make
 The executable files can be found at:
 
 - app: build/src/cxx_app
-- test suite: build/test/test_suite
+- test suite: build/test/test_runner

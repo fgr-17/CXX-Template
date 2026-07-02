@@ -13,6 +13,7 @@ RUN apt install -y clang-format
 RUN apt install -y git
 RUN apt install -y clang-tidy
 RUN apt install -y iwyu
+RUN apt install -y valgrind
 
 RUN printf "\nalias ls='ls --color=auto'\n" >> ~/.bashrc
 RUN printf "\nalias ll='ls -alF'\n" >> ~/.bashrc
